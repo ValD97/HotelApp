@@ -16,5 +16,14 @@ pipeline {
         cobertura(coberturaReportFile: '**/target/site/cobertura/coverage.xml')
       }
     }
+    stage('SonarQube') {
+      steps {
+        withSonarQubeEnv('Sonar') {
+          sh 'mvn clean package sonar:sonar'
+          waitForQualityGate(abortPipeline: true)
+        }
+
+      }
+    }
   }
 }
