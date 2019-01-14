@@ -18,7 +18,7 @@ pipeline {
     }
     stage('SonarQube') {
       steps {
-        withSonarQubeEnv('Sonar') {
+        withSonarQubeEnv('Local Sonarqube') {
           sh 'mvn clean package sonar:sonar'
           waitForQualityGate(abortPipeline: true)
         }
